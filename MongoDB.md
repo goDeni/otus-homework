@@ -99,7 +99,6 @@ $ docker exec -it some-mongo mongo
 { "_id" : ObjectId("5f8a7d4e2235e0b2ea340144"), "title" : "Trouble in Hogan's Alley", "year" : 1900, "cast" : [ ], "genres" : [ "Comedy" ] }
 { "_id" : ObjectId("5f8a7d4e2235e0b2ea340145"), "title" : "Two Old Sparks", "year" : 1900, "cast" : [ ], "genres" : [ "Short" ] }
 { "_id" : ObjectId("5f8a7d4e2235e0b2ea340146"), "title" : "The Wonder, Ching Ling Foo", "year" : 1900, "cast" : [ "Ching Ling Foo" ], "genres" : [ "Short" ] }
-Type "it" for more
 ```
 
 Запрос на 10 фильмов в которых снимался "Leonardo DiCaprio":
