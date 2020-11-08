@@ -1,0 +1,65 @@
+version: "3.7"
+
+
+services:
+  mongo_1_config_server:
+    container_name: "mongo_1_config_server"
+    image: mongo:4.0.20
+    command: --configsvr --replSet "rs0" --bind_ip 127.0.0.1,mongo_1_config_server --port 27017
+
+  mongo_2_config_server:
+    container_name: "mongo_2_config_server"
+    image: mongo:4.0.20
+    command: --configsvr --replSet "rs0" --bind_ip 127.0.0.1,mongo_2_config_server --port 27017
+
+  mongo_3_config_server:
+    container_name: "mongo_3_config_server"
+    image: mongo:4.0.20
+    command: --configsvr --replSet "rs0" --bind_ip 127.0.0.1,mongo_3_config_server --port 27017
+  
+  
+  shard_1_replica_0:
+    container_name: "shard_1_replica_0"
+    image: mongo:4.0.20
+    command: --shardsvr --replSet "shard1" --bind_ip 127.0.0.1,shard_1_replica_0 --port 27017
+  shard_1_replica_1:
+    container_name: "shard_1_replica_1"
+    image: mongo:4.0.20
+    command: --shardsvr --replSet "shard1" --bind_ip 127.0.0.1,shard_1_replica_1 --port 27017
+  shard_1_replica_2:
+    container_name: "shard_1_replica_2"
+    image: mongo:4.0.20
+    command: --shardsvr --replSet "shard1" --bind_ip 127.0.0.1,shard_1_replica_2 --port 27017
+
+
+  shard_2_replica_0:
+    container_name: "shard_2_replica_0"
+    image: mongo:4.0.20
+    command: --shardsvr --replSet "shard2" --bind_ip 127.0.0.1,shard_2_replica_0 --port 27017
+  shard_2_replica_1:
+    container_name: "shard_2_replica_1"
+    image: mongo:4.0.20
+    command: --shardsvr --replSet "shard2" --bind_ip 127.0.0.1,shard_2_replica_1 --port 27017
+  shard_2_replica_2:
+    container_name: "shard_2_replica_2"
+    image: mongo:4.0.20
+    command: --shardsvr --replSet "shard2" --bind_ip 127.0.0.1,shard_2_replica_2 --port 27017
+
+
+  shard_3_replica_0:
+    container_name: "shard_3_replica_0"
+    image: mongo:4.0.20
+    command: --shardsvr --replSet "shard3" --bind_ip 127.0.0.1,shard_3_replica_0 --port 27017
+  shard_3_replica_1:
+    container_name: "shard_3_replica_1"
+    image: mongo:4.0.20
+    command: --shardsvr --replSet "shard3" --bind_ip 127.0.0.1,shard_3_replica_1 --port 27017
+  shard_3_replica_2:
+    container_name: "shard_3_replica_2"
+    image: mongo:4.0.20
+    command: --shardsvr --replSet "shard3" --bind_ip 127.0.0.1,shard_3_replica_2 --port 27017
+
+  sharded_cluster:
+    container_name: sharded_cluster
+    image: mongo:4.0.20
+    command: mongos --port 27017 --bind_ip 127.0.0.1,sharded_cluster --configdb "rs0/mongo_1_config_server:27017,mongo_2_config_server:27017,mongo_3_config_server:27017"
